@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>《曾经》</title>
+  <style>
+    html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: url('7.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: "微软雅黑", sans-serif;
+  overflow: hidden;
+}
+
+
+    /* 标题淡入样式 */
+    .title {
+      font-size: 48px;
+      color: #ddd;
+      text-align: center;
+      margin-top: 60px;
+      opacity: 0;
+      animation: fadeIn 3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* 作文内容框在左边 */
+    .content-box {
+      position: absolute;
+      top: 20%;
+      left: 5%;
+      width: 45%;
+      height: 65%;
+      overflow-y: auto;
+      background-color: rgba(0, 0, 0, 0.35);
+      padding: 20px;
+      border-radius: 10px;
+      color: #ffb6c1;
+      font-size: 16px;
+      line-height: 1.9;
+    }
+
+    .typed-text {
+      white-space: pre-wrap;
+      text-indent: 2em;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<!--bgm-->
+<audio id="bgm" loop>
+    <source src="1.mp3" type="audio/mpeg" />
+    您的浏览器不支持音频播放。
+  </audio>
+
+  <script>
+    document.addEventListener('click', function playAudio() {
+      const bgm = document.getElementById('bgm');
+      if (bgm.paused) {
+        bgm.play();
+      }
+      
+      document.removeEventListener('click', playAudio);
+    });
+  </script>
+
+  <!-- 标题 -->
+  <div class="title">《无声的距离》</div>
+
+  <!-- 作文区域 -->
+  <div class="content-box">
+    <div class="typed-text" id="typedText"></div>
+  </div>
+
+  <script>
+    const text = `　　喜欢一人，却未能与之携手同行，这样的情感，许多时分，正如流水无声，悄然流过心头。心中有意，却因种种缘由，未曾开口相诉，未能共叙一段情长。
+
+　　误会，往往是阻隔心意的第一道墙。一言不明，或行止未合，便生芥蒂。你尝试说明，却只换得对方淡漠相对。彼此之间，无形的隔阂渐渐加深，好似秋水一方，隔岸难渡。未曾开始的情愫，就已被这误解所困。
+
+　　更有那生活的纷扰，日常琐事如影随形。彼此处境不同，时光不合节拍，聚少离多，成为不可抗拒的现实。你愿意靠近，却不得不退避三舍。问自己是否欠缺了什么，或是命数弄人。可感情之事，非力所能及，缘分未至，难强求也。
+
+　　你反复回首那些细碎的时光，心中如织成网的思绪。若当初言辞更为恰当，若当时耐心更深厚，也许结局会有别样模样。然世事难料，误会未解，情感未成，终究只能各自安放心头。
+
+　　于是，你学会了将这份情意藏于心底。不是忘却，也非放弃，而是与之共处，不让它扰乱凡尘。喜欢未必都需回响，许多时只是心间一缕清风，虽无声，却长存。
+
+　　此事亦教你，感情非独角戏，须两心同向，方能成事。误会需及时消解，沟通不可懈怠。更教你明白，真诚和理解，远比轰轰烈烈更为可贵。学会尊重，也学会自守。
+
+　　喜欢未成，虽觉遗憾，却亦非失败。它是心灵的一段历练，让你愈加沉稳，愈加明白情深意重之理。将来遇见真心之人，必能更坦然相待，心无旁骛。
+
+　　这一切，犹如庭前落花，虽无力挽留，却依旧淡香未散。缘起缘灭，未曾相见已成心结，也不过是时光深处的一段浅唱低吟。愿这份情意，随风而去，化作心头一抹浅淡的清愁，不扰人间纷扰，只守一隅安静。
+`;
+
+    const target = document.getElementById("typedText");
+    let index = 0;
+
+    function typeWriter() {
+      if (index < text.length) {
+        target.innerHTML += text[index] === '\n' ? '<br>' : text[index];
+        index++;
+        setTimeout(typeWriter, 35); 
+      }
+    }
+
+    window.onload = () => {
+      typeWriter();
+
+      
+      const audio = document.getElementById("bgm");
+      audio.play().catch(() => {
+        console.log("浏览器阻止了自动播放。");
+      });
+    };
+  </script>
+
+</body>
+</html>
